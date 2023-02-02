@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 const AuthError = require('../utils/AuthError');
 
-const { JWT_SECRET } = require('../app');
+require('dotenv').config();
+
+const { JWT_SECRET } = process.env;
 
 const auth = (req, res, next) => {
   const { authorization } = req.cookies;

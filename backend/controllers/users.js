@@ -5,7 +5,9 @@ const User = require('../models/user');
 const NotFoundError = require('../utils/NotFoundError');
 const AuthError = require('../utils/AuthError');
 
-const { JWT_SECRET } = require('../app');
+require('dotenv').config();
+
+const { JWT_SECRET } = process.env;
 
 const getAllUsers = (req, res, next) => {
   User.find({})
