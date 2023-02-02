@@ -1,0 +1,23 @@
+.profile__edit-button {
+  margin: 0 0 16px 0;
+  grid-area: edit-button;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: 1px solid #fff;
+  background-image: url(../../../images/profile__editbutton.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px;
+  align-self: end;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__edit-button {
+    width: 18px;
+    height: 18px;
+    background-size: 7.5px;
+    margin-left: 10px;
+  }
+}

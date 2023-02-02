@@ -1,0 +1,23 @@
+.profile__description {
+  margin: 0;
+  padding: 0;
+  max-width: 370px;
+  /*ограничение ширины, чтобы при вводе длинного описания кнопка редактирования не прилипала к кнопке добавления элементов*/
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 122.25%;
+  color: #FFF;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  grid-area: description;
+  align-self: start;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__description {
+    font-size: 14px;
+    line-height: 121.5%;
+    max-width: 290px;
+  }
+}

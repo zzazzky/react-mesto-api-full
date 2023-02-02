@@ -1,0 +1,15 @@
+.header {
+  padding: 0;
+  margin: 0;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

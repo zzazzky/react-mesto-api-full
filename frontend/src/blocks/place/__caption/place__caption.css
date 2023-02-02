@@ -1,0 +1,9 @@
+.place__caption {
+  padding: 0 15px 0 20px;
+  background-color: #fff;
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

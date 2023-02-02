@@ -1,0 +1,7 @@
+.popup__illustration {
+  position: relative;
+  margin: auto;
+  box-sizing: border-box;
+  z-index: 4;
+}
+

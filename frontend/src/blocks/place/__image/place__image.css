@@ -1,0 +1,11 @@
+.place__image {
+  height: 282px;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+}
+
+.place__image:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
