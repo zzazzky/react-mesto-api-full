@@ -19,24 +19,21 @@ class Api {
   getUserInfo() {
     return this._request(`${this._baseUrl}/users/me`, {
       method: "GET",
-      headers: {
-        authorization: this._headers.authorization,
-      },
+      credentials: 'include',
     });
   }
 
   getInitialCards() {
     return this._request(`${this._baseUrl}/cards`, {
       method: "GET",
-      headers: {
-        authorization: this._headers.authorization,
-      },
+      credentials: 'include',
     });
   }
 
   editProfile(newUserData) {
     return this._request(`${this._baseUrl}/users/me`, {
       method: "PATCH",
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify(newUserData),
     });
@@ -45,6 +42,7 @@ class Api {
   editAvatar(avatarLink) {
     return this._request(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         avatar: avatarLink,
@@ -55,6 +53,7 @@ class Api {
   addCard(newCardData) {
     return this._request(`${this._baseUrl}/cards`, {
       method: "POST",
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify(newCardData),
     });
@@ -63,27 +62,21 @@ class Api {
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
-      headers: {
-        authorization: this._headers.authorization,
-      },
+      credentials: 'include',
     });
   }
 
   _setCardLike(cardId) {
     return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
-      headers: {
-        authorization: this._headers.authorization,
-      },
+      credentials: 'include',
     });
   }
 
   _removeCardLike(cardId) {
     return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
-      headers: {
-        authorization: this._headers.authorization,
-      },
+      credentials: 'include',
     });
   }
 
@@ -97,9 +90,8 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-52",
+  baseUrl: "http://backend.mesto.gerasimova.nomoredomainsclub.ru",
   headers: {
-    authorization: "f244abf0-7dcd-442d-a985-b4b4e092fdb8",
     "Content-Type": "application/json",
   },
 });
