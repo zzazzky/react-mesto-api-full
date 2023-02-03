@@ -1,7 +1,7 @@
 const allowdedCors = [
   'https://frontend.mesto.gerasimova.nomoredomainsclub.ru',
   'http://frontend.mesto.gerasimova.nomoredomainsclub.ru',
-  'localhost:3000',
+  'http://localhost:3000',
 ];
 
 function cors(req, res, next) {
