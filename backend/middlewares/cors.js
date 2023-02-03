@@ -17,7 +17,7 @@ function cors(req, res, next) {
   if (method === 'OPTIONS') {
     res.setHeader('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
     res.setHeader('Access-Control-Allow-Headers', requestHeaders);
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Credentials', true);
   }
   next();
 }
