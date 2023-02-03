@@ -1,10 +1,9 @@
 function cors(req, res, next) {
-  const { origin } = req.headers;
   const { method } = req;
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   const requestHeaders = req.headers['access-control-request-headers'];
 
-  res.setHeader('Access-Control-Allow-Origin', origin);
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 
   if (method === 'OPTIONS') {
     res.setHeader('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
