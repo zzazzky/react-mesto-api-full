@@ -1,4 +1,4 @@
-export const BASE_URL = "http://backend.mesto.gerasimova.nomoredomainsclub.r";
+export const BASE_URL = "http://backend.mesto.gerasimova.nomoredomainsclub.ru";
 
 function checkResponse(res) {
   if (res.ok) {
@@ -11,7 +11,6 @@ function checkResponse(res) {
 export function register(password, email) {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
-    credentials: 'include',
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -29,7 +28,6 @@ export function register(password, email) {
 export function login(password, email) {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
-    credentials: 'include',
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -47,7 +45,6 @@ export function login(password, email) {
 export function getToken(jwt) {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
-    credentials: 'include',
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cookieParser = require('cookie-parser');
 const { celebrate, Joi, errors } = require('celebrate');
 const { handleError } = require('./utils/errorhandler');
 
@@ -27,7 +26,6 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 
 app.use(requestLogger);
 

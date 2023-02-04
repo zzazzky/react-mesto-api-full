@@ -17,33 +17,51 @@ class Api {
   }
 
   getUserInfo() {
+    const jwt = localStorage.getItem("jwt");
     return this._request(`${this._baseUrl}/users/me`, {
       method: "GET",
-      credentials: 'include',
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
     });
   }
 
   getInitialCards() {
+    const jwt = localStorage.getItem("jwt");
     return this._request(`${this._baseUrl}/cards`, {
       method: "GET",
-      credentials: 'include',
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
     });
   }
 
   editProfile(newUserData) {
+    const jwt = localStorage.getItem("jwt");
     return this._request(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      credentials: 'include',
-      headers: this._headers,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
       body: JSON.stringify(newUserData),
     });
   }
 
   editAvatar(avatarLink) {
+    const jwt = localStorage.getItem("jwt");
     return this._request(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      credentials: 'include',
-      headers: this._headers,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
       body: JSON.stringify({
         avatar: avatarLink,
       }),
@@ -51,32 +69,51 @@ class Api {
   }
 
   addCard(newCardData) {
+    const jwt = localStorage.getItem("jwt");
     return this._request(`${this._baseUrl}/cards`, {
       method: "POST",
-      credentials: 'include',
-      headers: this._headers,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
       body: JSON.stringify(newCardData),
     });
   }
 
   deleteCard(cardId) {
+    const jwt = localStorage.getItem("jwt");
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
-      credentials: 'include',
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
     });
   }
 
   _setCardLike(cardId) {
+    const jwt = localStorage.getItem("jwt");
     return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
-      credentials: 'include',
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
     });
   }
 
   _removeCardLike(cardId) {
+    const jwt = localStorage.getItem("jwt");
     return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
-      credentials: 'include',
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      }
     });
   }
 

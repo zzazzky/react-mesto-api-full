@@ -107,7 +107,7 @@ const login = (req, res, next) => {
         })
         .then(() => {
           const token = jwt.sign({ _id: user._id }, JWT_SECRET);
-          return res.cookie('authorization', token, { maxAge: 3600000 * 24 * 7, httpOnly: true }).send({ message: 'Авторизация успешна!' });
+          return res.send({ token });
         })
         .catch((err) => {
           next(err);

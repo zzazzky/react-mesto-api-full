@@ -52,7 +52,7 @@ function App() {
       .then(() => {
         history.push("/");
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.message));
   }
 
   const [cards, setCards] = React.useState([]);
@@ -65,7 +65,7 @@ function App() {
       .then(newCard => {
         setCards(state => state.map(c => (c._id === card._id ? newCard : c)));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.message));
   }
 
   function handleCardDelete(cardId) {
@@ -75,7 +75,7 @@ function App() {
       .then(res => {
         setCards(res);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.message));
   }
 
   React.useEffect(() => {
@@ -84,7 +84,7 @@ function App() {
       .then(res => {
         setCards(res);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.message));
   }, []);
 
   function handleCardClick(card) {
@@ -120,7 +120,7 @@ function App() {
         setCurrentUser(res);
       })
       .then(() => closeAllPopups())
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.message));
   }
 
   function handleUpdateAvatar(avatarLink) {
@@ -130,7 +130,7 @@ function App() {
         setCurrentUser(res);
       })
       .then(() => closeAllPopups())
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.message));
   }
 
   function handleAddPlaceSubmit(newCardData) {
@@ -140,7 +140,7 @@ function App() {
         setCards([newCard, ...cards]);
       })
       .then(() => closeAllPopups())
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.message));
   }
 
   function handleRegisterSubmit(password, email) {
@@ -168,7 +168,7 @@ function App() {
         checkToken(res);
       })
       .catch(err => {
-        console.log(err);
+        console.log(err.message);
       });
   }
 
