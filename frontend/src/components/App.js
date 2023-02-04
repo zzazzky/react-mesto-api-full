@@ -47,12 +47,12 @@ function App() {
 
   function checkToken(jwt) {
     getToken(jwt)
-      .then(res => setUserEmail(res.data.email))
+      .then(res => setUserEmail(res.email))
       .then(() => setLoggedIn(true))
       .then(() => {
         history.push("/");
       })
-      .catch(err => console.log(err.message));
+      .catch(err => console.log(err));
   }
 
   const [cards, setCards] = React.useState([]);
@@ -65,7 +65,7 @@ function App() {
       .then(newCard => {
         setCards(state => state.map(c => (c._id === card._id ? newCard : c)));
       })
-      .catch(err => console.log(err.message));
+      .catch(err => console.log(err));
   }
 
   function handleCardDelete(cardId) {
@@ -75,7 +75,7 @@ function App() {
       .then(res => {
         setCards(res);
       })
-      .catch(err => console.log(err.message));
+      .catch(err => console.log(err));
   }
 
   React.useEffect(() => {
@@ -84,7 +84,7 @@ function App() {
       .then(res => {
         setCards(res);
       })
-      .catch(err => console.log(err.message));
+      .catch(err => console.log(err));
   }, []);
 
   function handleCardClick(card) {
@@ -120,7 +120,7 @@ function App() {
         setCurrentUser(res);
       })
       .then(() => closeAllPopups())
-      .catch(err => console.log(err.message));
+      .catch(err => console.log(err));
   }
 
   function handleUpdateAvatar(avatarLink) {
@@ -130,7 +130,7 @@ function App() {
         setCurrentUser(res);
       })
       .then(() => closeAllPopups())
-      .catch(err => console.log(err.message));
+      .catch(err => console.log(err));
   }
 
   function handleAddPlaceSubmit(newCardData) {
@@ -140,7 +140,7 @@ function App() {
         setCards([newCard, ...cards]);
       })
       .then(() => closeAllPopups())
-      .catch(err => console.log(err.message));
+      .catch(err => console.log(err));
   }
 
   function handleRegisterSubmit(password, email) {
@@ -167,8 +167,24 @@ function App() {
       .then(res => {
         checkToken(res);
       })
+      .then(() => {
+        api
+          .getUserInfo()
+          .then(res => {
+            setCurrentUser(res);
+          })
+          .catch(err => console.log(err));
+      })
+      .then(() => {
+        api
+          .getInitialCards()
+          .then(res => {
+            setCards(res);
+          })
+          .catch(err => console.log(err));
+      })
       .catch(err => {
-        console.log(err.message);
+        console.log(err);
       });
   }
 
@@ -176,6 +192,12 @@ function App() {
     localStorage.removeItem("jwt");
     setLoggedIn(false);
     setUserEmail("");
+    setCurrentUser({
+      name: "",
+      about: "",
+      avatar: "",
+      _id: "",
+    })
   }
 
   function handleHeaderLinkClick() {
