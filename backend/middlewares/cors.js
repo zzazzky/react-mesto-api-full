@@ -12,10 +12,10 @@ function cors(req, res, next) {
   if (allowdedCors.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   }
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (method === 'OPTIONS') {
     res.setHeader('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   }
   next();
 }
