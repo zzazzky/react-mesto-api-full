@@ -13,8 +13,8 @@ router.get('', getAllUsers);
 router.get('/me', getCurrentUser);
 router.patch('/me', celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
+    name: Joi.string().required().min(2).max(30),
+    about: Joi.string().required().min(2).max(30),
   }),
 }), updateProfile);
 
@@ -22,7 +22,7 @@ router.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
   // Ошибка config вызвана \ в регулярном выражении. Если не использовать \, валидация некорректна
   // eslint-disable-next-line
-    avatar: Joi.string().pattern(/https?:\/\/(www\.)?[a-z]+.[a-z]+[a-zA-Z0-9\/\-\._~:\?#\[\]@!\$&'\(\)\*\+,;=]+/),
+    avatar: Joi.string().required().pattern(/https?:\/\/(www\.)?[a-z]+.[a-z]+[a-zA-Z0-9\/\-\._~:\?#\[\]@!\$&'\(\)\*\+,;=]+/),
   }),
 }), updateAvatar);
 

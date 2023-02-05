@@ -4,6 +4,7 @@ const { ValidationError } = mongoose.Error.ValidationError;
 const { CastError } = mongoose.Error.CastError;
 const NotFoundError = require('./NotFoundError');
 const AuthError = require('./AuthError');
+const ForbiddenError = require('./ForbiddenError');
 
 const handleError = (err, req, res, next) => {
   let ResStatus = 500;
@@ -11,7 +12,9 @@ const handleError = (err, req, res, next) => {
     ResStatus = 409;
     res.status(ResStatus).send({ message: 'Пользователь с таким e-mail уже существует' });
     next();
-  } else if (err instanceof NotFoundError || err instanceof AuthError) {
+  } else if (
+    err instanceof NotFoundError || err instanceof AuthError || err instanceof ForbiddenError
+  ) {
     ResStatus = err.statusCode;
     res.status(ResStatus).send({ message: err.message });
     next();

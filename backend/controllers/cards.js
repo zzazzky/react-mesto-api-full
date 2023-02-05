@@ -1,9 +1,9 @@
 const Card = require('../models/card');
 const NotFoundError = require('../utils/NotFoundError');
-const AuthError = require('../utils/AuthError');
+const ForbiddenError = require('../utils/ForbiddenError');
 
 const getAllCards = (req, res, next) => {
-  Card.find({})
+  Card.find({}).sort({ createdAt: -1 })
     .populate(['owner', 'likes'])
     .then((cards) => res.send(cards))
     .catch((err) => {
@@ -29,7 +29,7 @@ const deleteCard = (req, res, next) => {
     .orFail(new NotFoundError('Публикация не найдена'))
     .then((card) => {
       if (card.owner._id.toString() !== req.user._id.toString()) {
-        return Promise.reject(new AuthError('Вы не можете удалить чужую публикацию!', 403));
+        return Promise.reject(new ForbiddenError('Вы не можете удалить чужую публикацию!'));
       }
       return Card.findByIdAndRemove(req.params.cardId)
         .then(() => { res.status(200).send(card); });

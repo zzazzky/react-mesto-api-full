@@ -15,6 +15,7 @@ import Login from "./Login";
 import Register from "./Register";
 import InfoTooltip from "./InfoTooltip";
 import { getToken, login, register } from "../utils/Auth";
+import AuthorizationRoute from "./AuthorizationRoute";
 
 function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
@@ -151,6 +152,9 @@ function App() {
       .then(() => {
         setInfoTooltipOpen(true);
       })
+      .then(() => {
+        history.push("/sign-in");
+      })
       .catch(() => {
         setInfoTooltipOpen(true);
       });
@@ -243,12 +247,18 @@ function App() {
             onLinkClick={handleHeaderLinkClick}
           />
           <Switch>
-            <Route path="/sign-in">
-              <Login onAuthorizate={handleLoginSubmit} />
-            </Route>
-            <Route path="/sign-up">
-              <Register onAuthorizate={handleRegisterSubmit} />
-            </Route>
+            <AuthorizationRoute
+            component={Login}
+            path="/sign-in"
+            onAuthorizate={handleLoginSubmit}
+            loggedIn={loggedIn}
+            />
+            <AuthorizationRoute 
+            component={Register} 
+            path="/sign-up"  
+            onAuthorizate={handleRegisterSubmit}
+            loggedIn={loggedIn} 
+            />
             <ProtectedRoute
               component={Main}
               path="/"

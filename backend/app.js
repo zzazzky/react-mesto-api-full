@@ -5,7 +5,7 @@ const { handleError } = require('./utils/errorhandler');
 
 require('dotenv').config();
 
-const { PORT = 3000, JWT_SECRET } = process.env;
+const { PORT = 3000, NODE_ENV, JWT_SECRET } = process.env;
 
 const app = express();
 
@@ -40,7 +40,7 @@ app.get('/crash-test', () => {
 app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
+    password: Joi.string().required(),
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
     // Ошибка config вызвана \ в регулярном выражении. Если не использовать \, валидация некорректна
@@ -51,7 +51,7 @@ app.post('/signup', celebrate({
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
+    password: Joi.string().required(),
   }),
 }), login);
 
@@ -60,15 +60,16 @@ app.use(auth);
 app.use('/users', userRouter);
 app.use('/cards', cardsRouter);
 
-app.use(errorLogger);
-
-app.use(errors());
 app.use((req, res, next) => {
   const err = new NotFoundError('Страница не найдена');
   next(err);
 });
+
+app.use(errorLogger);
+
+app.use(errors());
 app.use(handleError);
 
 app.listen(PORT);
 
-module.exports = { JWT_SECRET };
+module.exports = { NODE_ENV, JWT_SECRET };

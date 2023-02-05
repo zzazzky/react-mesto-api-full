@@ -5,9 +5,7 @@ const User = require('../models/user');
 const NotFoundError = require('../utils/NotFoundError');
 const AuthError = require('../utils/AuthError');
 
-require('dotenv').config();
-
-const { JWT_SECRET } = process.env;
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 const getAllUsers = (req, res, next) => {
   User.find({})
@@ -46,7 +44,10 @@ const createUser = (req, res, next) => {
       })
         .then((createdUser) => {
           User.findById(createdUser._id)
-            .then((user) => { res.status(201).send(user); });
+            .then((user) => { res.status(201).send(user); })
+            .catch((err) => {
+              next(err);
+            });
         })
         .catch((err) => {
           next(err);
@@ -93,7 +94,7 @@ const login = (req, res, next) => {
   User.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        return Promise.reject(new AuthError('Неправильный e-mail или пароль', 401));
+        return Promise.reject(new AuthError('Неправильный e-mail или пароль'));
       }
       return user;
     })
@@ -101,12 +102,12 @@ const login = (req, res, next) => {
       bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            return Promise.reject(new AuthError('Неправильный e-mail или пароль', 401));
+            return Promise.reject(new AuthError('Неправильный e-mail или пароль'));
           }
           return user;
         })
         .then(() => {
-          const token = jwt.sign({ _id: user._id }, JWT_SECRET);
+          const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
           return res.send({ token });
         })
         .catch((err) => {
