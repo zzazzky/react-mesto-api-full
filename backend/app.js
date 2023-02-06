@@ -5,7 +5,7 @@ const { handleError } = require('./utils/errorhandler');
 
 require('dotenv').config();
 
-const { PORT = 3000, NODE_ENV, JWT_SECRET } = process.env;
+const { PORT = 3000 } = process.env;
 
 const app = express();
 
@@ -71,5 +71,3 @@ app.use(errors());
 app.use(handleError);
 
 app.listen(PORT);
-
-module.exports = { NODE_ENV, JWT_SECRET };
